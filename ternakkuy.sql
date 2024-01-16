@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 16 Jan 2024 pada 07.09
+-- Waktu pembuatan: 16 Jan 2024 pada 10.28
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -29,7 +29,6 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `items` (
   `iditem` int(11) NOT NULL,
-  `userid` int(11) NOT NULL,
   `nama` varchar(255) NOT NULL,
   `idkategori` int(11) NOT NULL,
   `harga` double NOT NULL,
@@ -41,11 +40,9 @@ CREATE TABLE `items` (
 -- Dumping data untuk tabel `items`
 --
 
-INSERT INTO `items` (`iditem`, `userid`, `nama`, `idkategori`, `harga`, `foto`, `desk`) VALUES
-(1, 1, 'Sapi Kesayangan', 1, 100000000, 'Ff0eeCV0LFzEiyTMyO5K.jpg', 'Sapi Kesayangan keluarga grass-fed'),
-(2, 1, 'Pakan Ayam mantap', 5, 300000, 'qbicK88SRGPXsNWutHOx.jpg', 'Pakan Ayam kualitas tinggi'),
-(3, 1, 'Ayam ternak', 3, 20000000, 'oqwthL2CzZVBJRo3cki4.jpg', 'Ayam jago'),
-(4, 1, 'Kambing goated', 2, 50000000, 'xzC6KDvVicAH44D3C60e.jpg', 'Kambing goat yeahh');
+INSERT INTO `items` (`iditem`, `nama`, `idkategori`, `harga`, `foto`, `desk`) VALUES
+(7, 'Kambing GOAT', 2, 1000000000, 'DJxwkgFuQFMRhtdus7f3.jpg', 'Kambing Greatest Of All Time'),
+(8, 'Pakan Ayam mantap', 3, 30000000, 'Pi3AyqXtPG1vZFZgUqp1.jpg', 'Pakan ayam aneka rasa');
 
 -- --------------------------------------------------------
 
@@ -89,7 +86,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `phonenumber`) VALUES
 (1, 'test', '$2y$10$CE3E4rYNBfytGI1xdheci.IsAdFG0j.GOTc0.az1e4EdET/BkYfDu', 'test@test.com', '081234'),
-(2, 'Zaki', '$2y$10$fz.L4.qR0.gAuykNWeJhburWU5kPjR1aXPth4k8Wh7JJXVBEICJwS', 'zaki@ganteng.com', '081234');
+(2, 'Zaki', '$2y$10$fz.L4.qR0.gAuykNWeJhburWU5kPjR1aXPth4k8Wh7JJXVBEICJwS', 'zaki@ganteng.com', '081234'),
+(3, 'Jestin', '$2y$10$pc3KBvV9CyjAJi2XrUTpzOuob8vBpxqWcOF1bXCycVnxZjLuDfpOC', 'Jestin@gmail.com', '08123456');
 
 --
 -- Indexes for dumped tables
@@ -100,9 +98,7 @@ INSERT INTO `users` (`id`, `username`, `password`, `email`, `phonenumber`) VALUE
 --
 ALTER TABLE `items`
   ADD PRIMARY KEY (`iditem`),
-  ADD UNIQUE KEY `nama` (`nama`),
-  ADD KEY `tipeKategori` (`idkategori`),
-  ADD KEY `userItem` (`userid`);
+  ADD UNIQUE KEY `nama` (`nama`);
 
 --
 -- Indeks untuk tabel `kategori`
@@ -124,7 +120,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `items`
 --
 ALTER TABLE `items`
-  MODIFY `iditem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `iditem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `kategori`
@@ -136,7 +132,7 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -146,8 +142,7 @@ ALTER TABLE `users`
 -- Ketidakleluasaan untuk tabel `items`
 --
 ALTER TABLE `items`
-  ADD CONSTRAINT `tipeKategori` FOREIGN KEY (`idkategori`) REFERENCES `kategori` (`idkategori`),
-  ADD CONSTRAINT `userItem` FOREIGN KEY (`userid`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `tipeKategori` FOREIGN KEY (`idkategori`) REFERENCES `kategori` (`idkategori`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
